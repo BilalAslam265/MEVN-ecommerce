@@ -10,6 +10,7 @@ const router = require("express").Router();
 //CREATE
 
 router.post("/", verifyToken, async (req, res) => {
+  // console.log(req);
   const newOrder = new Order(req.body);
 
   try {
