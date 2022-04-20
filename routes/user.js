@@ -18,6 +18,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 
   try {
+    
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
