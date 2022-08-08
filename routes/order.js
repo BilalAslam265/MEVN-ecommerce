@@ -29,8 +29,9 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
       {
         $set: req.body,
       },
-      { new: true }
+      { new: true}
     );
+    console.log(updatedOrder);
     res.status(200).json(updatedOrder);
   } catch (err) {
     res.status(500).json(err);
@@ -62,9 +63,17 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const orders = await Order.find();
-    res.status(200).json(orders);
+    console.log(orders);
+    res.status(200).json({
+      status: 'success',
+      Quantity: orders.length,
+      data: { orders },
+    });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
   }
 });
 
